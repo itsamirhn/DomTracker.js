@@ -79,7 +79,7 @@ class DatabaseManager {
 			WHERE id = ? AND user_id = ?
 		`);
 		const result = await stmt.bind(itemId, userId).run();
-		return result.changes > 0;
+		return result.meta.changes > 0;
 	}
 
 	async getAllActiveTrackingItems() {
