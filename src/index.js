@@ -44,7 +44,12 @@ class DatabaseManager {
 			INSERT OR IGNORE INTO users (telegram_id, username, first_name, last_name)
 			VALUES (?, ?, ?, ?)
 		`);
-		await stmt.bind(telegramId, userData.username, userData.first_name, userData.last_name).run();
+		await stmt.bind(
+			telegramId,
+			userData.username || '',
+			userData.first_name || '',
+			userData.last_name || ''
+		).run();
 
 		const user = await this.db.prepare(`
 			SELECT * FROM users WHERE telegram_id = ?
